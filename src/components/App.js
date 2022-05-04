@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import '../styles/App.scss';
+import '../styles/main.scss';
 import getApiData from './services/Fetch';
 import MovieSceneList from './MovieSceneList';
-import MovieSceneItem from './MovieSceneItem';
 
 function App() {
   //Creo variable de estado donde voy a guardar:
@@ -21,7 +20,8 @@ function App() {
   return (
     <div>
       <h1> Owen Wilson "WOW"</h1>
-      <MovieSceneList movies={movieList}></MovieSceneList>
+      {/*Paso por props a movieList el array que contiene mi listado de peliculas*/}
+      <MovieSceneList movies={movieList} />
     </div>
   );
 }
