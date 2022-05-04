@@ -19,22 +19,19 @@ function App() {
     });
   }, []);
 
-  const handleSearchMovie = (data) => {
-    const inputValue = data.value;
-
-    const newMovieList = {
-      ...movieList, [inputValue]
-    };
+  const handleSearchMovie = (value) => {
+    setSearchMovie(value);
+    console.log(value);
   };
   return (
     <div>
       <h1> Owen Wilson "WOW"</h1>
+      <Filters
+        handleSearchMovie={handleSearchMovie}
+        searchMovie={searchMovie}
+      />
       {/*Paso por props a movieList el array que contiene mi listado de peliculas*/}
       <MovieSceneList movies={movieList} />
-      <Filters
-        searchMovie={searchMovie}
-        handleSearchMovie={handleSearchMovie}
-      />
     </div>
   );
 }

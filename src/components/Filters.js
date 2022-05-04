@@ -15,4 +15,4 @@ function Filters(props) {
   );
 }
 
-export default filter;
+export default Filters;

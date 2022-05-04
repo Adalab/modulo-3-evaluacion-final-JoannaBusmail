@@ -1,15 +1,13 @@
 function FilterMovie(props) {
   const handleInputSearchMovies = (ev) => {
-   props.handleInputSearchMovies({
-  value: ev.target.value,
-});
+    props.handleSearchMovie(ev.target.value);
+  };
   return (
     <>
-      <label htmlFor='movieFilter'>Movies:</label>
+      <label htmlFor=''> Movie: </label>
       <input
         type='text'
-        id='movie'
-        name='movie'
+        id=''
         value={props.searchMovie}
         onChange={handleInputSearchMovies}
       ></input>
