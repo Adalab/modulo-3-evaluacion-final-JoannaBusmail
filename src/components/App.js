@@ -18,15 +18,26 @@ function App() {
       console.log(apiData);
     });
   }, []);
-
+  //cojo el valor del input.
+  //el valor lo he pasado por parametros ya que este valor lo recojo del componente filter
   const handleSearchMovie = (value) => {
     setSearchMovie(value);
     console.log(value);
   };
+
+  const movieFilters = movieList.filter((eachMovie) => {
+    if (searchMovie === '') {
+      return true;
+    } else {
+      return eachMovie.movie === searchMovie;
+    }
+  });
   return (
     <div>
       <h1> Owen Wilson "WOW"</h1>
       <Filters
+        //necesita la funcion para guardar en mi variable de search movies el valor que escribe la usuario en el input
+        // y necesito la varibale de estado
         handleSearchMovie={handleSearchMovie}
         searchMovie={searchMovie}
       />
