@@ -6,6 +6,7 @@ const handleSubmit = (ev) => {
 };
 
 function Filters(props) {
+  console.log(props.years);
   return (
     <section>
       <form onSubmit={handleSubmit}>
@@ -13,7 +14,7 @@ function Filters(props) {
           handleSearchMovie={props.handleSearchMovie}
           searchMovie={props.searchMovie}
         />
-        <FilterYear ýears={props.year} />
+        <FilterYear years={props.years} />
       </form>
     </section>
   );

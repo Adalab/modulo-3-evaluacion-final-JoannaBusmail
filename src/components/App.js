@@ -10,6 +10,7 @@ function App() {
   //mis cambios en el listado al filtrar
   const [movieList, setMovieList] = useState([]);
   const [searchMovie, setSearchMovie] = useState('');
+  //const [searchYear, setSearchYear] = useState([]);
 
   //quiero renderizar una única vez, el listado de la API, cuando se caraga la pagina para eso hago un useEffect y le incluyo como segundo parámetro un array vacío
   useEffect(() => {
@@ -39,6 +40,8 @@ function App() {
     console.log(yearMovies);
     const uniqueYear = new Set(yearMovies);
     const uniques = [...uniqueYear];
+    return uniques;
+
     console.log(uniqueYear);
   };
 
@@ -50,7 +53,7 @@ function App() {
         // y necesito la varibale de estado
         handleSearchMovie={handleSearchMovie}
         searchMovie={searchMovie}
-        year={getYear()}
+        years={getYear()}
       />
       {/*Paso por props a movieList el array que contiene mi listado de peliculas*/}
       {/*Cambio, que quiero que se pinte, la lista de movie filters*/}
