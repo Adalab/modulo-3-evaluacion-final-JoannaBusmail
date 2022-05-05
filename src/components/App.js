@@ -10,7 +10,7 @@ function App() {
   //mis cambios en el listado al filtrar
   const [movieList, setMovieList] = useState([]);
   const [searchMovie, setSearchMovie] = useState('');
-  //const [searchYear, setSearchYear] = useState([]);
+  const [searchYear, setSearchYear] = useState('all');
 
   //quiero renderizar una única vez, el listado de la API, cuando se caraga la pagina para eso hago un useEffect y le incluyo como segundo parámetro un array vacío
   useEffect(() => {
@@ -26,12 +26,23 @@ function App() {
     console.log(value);
   };
 
-  //filtro por nombre de pelicula
-  const movieFilters = movieList.filter((movieFilter) => {
-    return movieFilter.movieName
-      .toLocaleLowerCase()
-      .includes(searchMovie.toLocaleLowerCase());
-  });
+  const handleSearchYear = (value) => {
+    setSearchYear(value);
+  };
+
+  const filters = movieList
+    .filter((movieFilter) => {
+      return movieFilter.movieName
+        .toLocaleLowerCase()
+        .includes(searchMovie.toLocaleLowerCase());
+    })
+    .filter((yearFilter) => {
+      if (searchYear === 'all') {
+        return true;
+      } else {
+        return yearFilter.year === parseInt.searchYear;
+      }
+    });
 
   //filtro por año
   //este array que me devuelve tengo que mandarlo por props al componente filterYear
@@ -41,8 +52,6 @@ function App() {
     const uniqueYear = new Set(yearMovies);
     const uniques = [...uniqueYear];
     return uniques;
-
-    console.log(uniqueYear);
   };
 
   return (
@@ -54,10 +63,10 @@ function App() {
         handleSearchMovie={handleSearchMovie}
         searchMovie={searchMovie}
         years={getYear()}
+        handleSearchYear={handleSearchYear}
       />
       {/*Paso por props a movieList el array que contiene mi listado de peliculas*/}
-      {/*Cambio, que quiero que se pinte, la lista de movie filters*/}
-      <MovieSceneList movies={movieFilters} />
+      <MovieSceneList movies={filters} />
     </div>
   );
 }

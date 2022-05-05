@@ -15,5 +15,4 @@ function FilterMovie(props) {
     </>
   );
 }
-
 export default FilterMovie;
