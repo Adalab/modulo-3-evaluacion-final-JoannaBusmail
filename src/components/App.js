@@ -45,6 +45,9 @@ function App() {
     });
 
   //filtro por año
+  //Tengo que recorrer mi array inicial y sacar solo el dato del año.
+  //Una vez lo tengo, tengo que quedarme con valores únicos, es decir no repetir años, ya que esto lo usaré para el select en el componente de filtrar por años.
+  //este método me devuelve un objeto, tengo que ocnvertirlo en array con el spread
   //este array que me devuelve tengo que mandarlo por props al componente filterYear
   const getYear = () => {
     const yearMovies = movieList.map((movieYear) => movieYear.year);
