@@ -25,13 +25,12 @@ function App() {
     console.log(value);
   };
 
-  const movieFilters = movieList.filter((eachMovie) => {
-    if (searchMovie === '') {
-      return true;
-    } else {
-      return eachMovie.movie === searchMovie;
-    }
+  const movieFilters = movieList.filter((movieFilter) => {
+    return movieFilter.movieName
+      .toLocaleLowerCase()
+      .includes(searchMovie.toLocaleLowerCase());
   });
+
   return (
     <div>
       <h1> Owen Wilson "WOW"</h1>
@@ -42,7 +41,7 @@ function App() {
         searchMovie={searchMovie}
       />
       {/*Paso por props a movieList el array que contiene mi listado de peliculas*/}
-      <MovieSceneList movies={movieList} />
+      <MovieSceneList movies={movieFilters} />
     </div>
   );
 }
