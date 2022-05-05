@@ -13,7 +13,7 @@ function Filters(props) {
           handleSearchMovie={props.handleSearchMovie}
           searchMovie={props.searchMovie}
         />
-        <FilterYear />
+        <FilterYear ýears={props.year} />
       </form>
     </section>
   );

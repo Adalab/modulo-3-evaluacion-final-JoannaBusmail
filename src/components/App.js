@@ -25,11 +25,22 @@ function App() {
     console.log(value);
   };
 
+  //filtro por nombre de pelicula
   const movieFilters = movieList.filter((movieFilter) => {
     return movieFilter.movieName
       .toLocaleLowerCase()
       .includes(searchMovie.toLocaleLowerCase());
   });
+
+  //filtro por año
+  //este array que me devuelve tengo que mandarlo por props al componente filterYear
+  const getYear = () => {
+    const yearMovies = movieList.map((movieYear) => movieYear.year);
+    console.log(yearMovies);
+    const uniqueYear = new Set(yearMovies);
+    const uniques = [...uniqueYear];
+    console.log(uniqueYear);
+  };
 
   return (
     <div>
@@ -39,8 +50,10 @@ function App() {
         // y necesito la varibale de estado
         handleSearchMovie={handleSearchMovie}
         searchMovie={searchMovie}
+        year={getYear()}
       />
       {/*Paso por props a movieList el array que contiene mi listado de peliculas*/}
+      {/*Cambio, que quiero que se pinte, la lista de movie filters*/}
       <MovieSceneList movies={movieFilters} />
     </div>
   );
