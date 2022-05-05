@@ -40,7 +40,7 @@ function App() {
       if (searchYear === 'all') {
         return true;
       } else {
-        return yearFilter.year === parseInt.searchYear;
+        return yearFilter.year === searchYear;
       }
     });
 

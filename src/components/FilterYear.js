@@ -1,12 +1,14 @@
 function FilterYear(props) {
   const handleSelectOption = (ev) => {
-    props.handleSearchYear(ev.target.value);
+    props.handleSearchYear(parseInt(ev.target.value));
   };
   const renderYears = () => {
-    return props.years.map((theYear) => {
+    return props.years.map((theYear, index) => {
       return (
         <>
-          <option value={theYear}>{theYear}</option>
+          <option key={index} value={theYear}>
+            {theYear}
+          </option>
         </>
       );
     });
