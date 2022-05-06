@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { matchPath, useLocation } from 'react-router';
 
 import getApiData from './services/Fetch';
+import lsObject from './services/ls';
 
 import MovieSceneList from './MovieSceneList';
 import Filters from './Filters';
@@ -14,7 +15,7 @@ function App() {
   // mi listado inicial cuando carga la pagina --viene de la API
   //mis cambios en el listado al filtrar
   const [movieList, setMovieList] = useState([]);
-  const [searchMovie, setSearchMovie] = useState('');
+  const [searchMovie, setSearchMovie] = useState(lsObject.get('inputs', ''));
   const [searchYear, setSearchYear] = useState('all');
 
   //quiero renderizar una única vez, el listado de la API, cuando se caraga la pagina para eso hago un useEffect y le incluyo como segundo parámetro un array vacío
@@ -28,6 +29,7 @@ function App() {
   //el valor lo he pasado por parametros ya que este valor lo recojo del componente filter
   const handleSearchMovie = (value) => {
     setSearchMovie(value);
+    lsObject.set('input', value);
     console.log(value);
   };
 
@@ -38,8 +40,8 @@ function App() {
   const filters = movieList
     .filter((movieFilter) => {
       return movieFilter.movieName
-        .toLocaleLowerCase()
-        .includes(searchMovie.toLocaleLowerCase());
+        .toLowerCase()
+        .includes(searchMovie.toLowerCase());
     })
     .filter((yearFilter) => {
       if (searchYear === 'all') {
