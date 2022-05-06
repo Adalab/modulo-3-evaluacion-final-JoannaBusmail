@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.c5e3b90e.css","mappings":"AAAA,QACI,WAAY","sources":["styles/components/movieSceneItemStyles.scss"],"sourcesContent":[".poster{\r\n    width: 200px;\r\n}"],"names":[],"sourceRoot":""}
