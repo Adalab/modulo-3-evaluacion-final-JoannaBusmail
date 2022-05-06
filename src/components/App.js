@@ -64,6 +64,11 @@ function App() {
     return uniques;
   };
 
+  const notFound = () => {
+    if (searchMovie !== '' && filters.length === 0) {
+      return <p>{searchMovie} Not Found</p>;
+    }
+  };
   const { pathname } = useLocation();
   console.log(pathname);
   const dataPath = matchPath('/movie/:movieId', pathname);
@@ -92,7 +97,7 @@ function App() {
                   years={getYear()}
                   handleSearchYear={handleSearchYear}
                 />
-
+                {notFound()}
                 <MovieSceneList movieItem={filters} />
               </>
             }
