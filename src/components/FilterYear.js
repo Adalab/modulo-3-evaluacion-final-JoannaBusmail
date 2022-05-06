@@ -1,14 +1,14 @@
+import movieSceneItem from './MovieSceneItem';
+
 function FilterYear(props) {
   const handleSelectOption = (ev) => {
     props.handleSearchYear(parseInt(ev.target.value));
   };
   const renderYears = () => {
-    return props.years.map((theYear, index) => {
+    return props.years.map((theYear) => {
       return (
         <>
-          <option key={index} value={theYear}>
-            {theYear}
-          </option>
+          <option value={theYear}>{theYear}</option>
         </>
       );
     });

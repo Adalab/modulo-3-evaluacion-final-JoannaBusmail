@@ -91,7 +91,7 @@ function App() {
                   handleSearchYear={handleSearchYear}
                 />
 
-                <MovieSceneList movies={filters} />
+                <MovieSceneList movieItem={filters} />
               </>
             }
           />
