@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
 import '../styles/main.scss';
+import { useEffect, useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import { matchPath, useLocation } from 'react-router';
+
 import getApiData from './services/Fetch';
+
 import MovieSceneList from './MovieSceneList';
 import Filters from './Filters';
+import MovieSceneDetail from './MovieSceneDetail';
 
 function App() {
   //Creo variable de estado donde voy a guardar:
@@ -51,26 +56,52 @@ function App() {
   //este array que me devuelve tengo que mandarlo por props al componente filterYear
   const getYear = () => {
     const yearMovies = movieList.map((movieYear) => movieYear.year);
-    console.log(yearMovies);
+
     const uniqueYear = new Set(yearMovies);
     const uniques = [...uniqueYear];
     return uniques;
   };
 
+  const { pathname } = useLocation();
+  console.log(pathname);
+  const dataPath = matchPath('/movie/:movieId', pathname);
+  console.log(dataPath);
+
+  const movieId = dataPath !== null ? dataPath.params.movieId : null;
+  const movieFound = movieList.find((item) => item.id === movieId);
+
+  console.log({ movieId, movieFound, movieList });
+
   return (
-    <div>
+    <>
       <h1> Owen Wilson "WOW"</h1>
-      <Filters
-        //necesita la funcion para guardar en mi variable de search movies el valor que escribe la usuario en el input
-        // y necesito la varibale de estado
-        handleSearchMovie={handleSearchMovie}
-        searchMovie={searchMovie}
-        years={getYear()}
-        handleSearchYear={handleSearchYear}
-      />
-      {/*Paso por props a movieList el array que contiene mi listado de peliculas*/}
-      <MovieSceneList movies={filters} />
-    </div>
+
+      <div>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <>
+                <Filters
+                  //necesita la funcion para guardar en mi variable de search movies el valor que escribe la usuario en el input
+                  // y necesito la varibale de estado
+                  handleSearchMovie={handleSearchMovie}
+                  searchMovie={searchMovie}
+                  years={getYear()}
+                  handleSearchYear={handleSearchYear}
+                />
+
+                <MovieSceneList movies={filters} />
+              </>
+            }
+          />
+          <Route
+            path='/movie/:movieId'
+            element={<MovieSceneDetail movieItem={movieFound} />}
+          />
+        </Routes>
+      </div>
+    </>
   );
 }
 
