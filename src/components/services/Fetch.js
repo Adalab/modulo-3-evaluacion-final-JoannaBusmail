@@ -6,7 +6,7 @@ const getApiData = () => {
     .then((data) => {
       const cleanData = data.map((movie) => {
         return {
-          id: movie.movie,
+          id: movie.timestamp,
           poster: movie.poster,
           movieName: movie.movie,
           fullLine: movie.full_line,
@@ -15,7 +15,7 @@ const getApiData = () => {
           audio: movie.audio,
         };
       });
-      console.log(cleanData);
+
       return cleanData;
     });
 };
