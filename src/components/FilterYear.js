@@ -17,8 +17,8 @@ function FilterYear(props) {
     <>
       <label> Year</label>
       <select name='year' onChange={handleSelectOption}>
+        <option value='all'>ALL</option>
         {renderYears()}
-        <option value='all'>ALL</option>;{renderYears()}
       </select>
     </>
   );
