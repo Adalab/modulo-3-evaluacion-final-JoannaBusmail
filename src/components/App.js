@@ -34,7 +34,9 @@ function App() {
     });
   }, []);
 
-  const addMovie = () => {};
+  const addMovie = () => {
+    setMovieList([...movieList, newMovie]);
+  };
 
   const changeData = (nombreInput, valueInput) => {
     setNewMovie({ ...newMovie, [nombreInput]: valueInput });

@@ -15,7 +15,7 @@ function MovieForm(props) {
       <input
         type='text'
         id='movieName'
-        value={props.newMovie.name}
+        value={props.newMovie.movieName}
         onChange={handleInput}
       ></input>
       <label>personaje </label>
