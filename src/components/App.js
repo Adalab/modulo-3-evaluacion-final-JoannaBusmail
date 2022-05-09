@@ -9,6 +9,8 @@ import lsObject from './services/ls';
 import MovieSceneList from './MovieSceneList';
 import Filters from './Filters';
 import MovieSceneDetail from './MovieSceneDetail';
+import movieSceneItem from './MovieSceneItem';
+import MovieForm from './MovieForm';
 
 function App() {
   //Creo variable de estado donde voy a guardar:
@@ -19,6 +21,11 @@ function App() {
   const [searchYear, setSearchYear] = useState('all');
   const [searchDirector, setSearchDirector] = useState('');
   const [searchCharacter, setSearchCharacter] = useState('select');
+  const [newMovie, setNewMovie] = useState({
+    id: '',
+    movieName: '',
+    character: '',
+  });
   //quiero renderizar una única vez, el listado de la API, cuando se caraga la pagina para eso hago un useEffect y le incluyo como segundo parámetro un array vacío
   useEffect(() => {
     getApiData().then((apiData) => {
@@ -26,6 +33,12 @@ function App() {
       console.log(apiData);
     });
   }, []);
+
+  const addMovie = () => {};
+
+  const changeData = (nombreInput, valueInput) => {
+    setNewMovie({ ...newMovie, [nombreInput]: valueInput });
+  };
   //cojo el valor del input.
   //el valor lo he pasado por parametros ya que este valor lo recojo del componente filter
   const handleSearchMovie = (value) => {
@@ -44,6 +57,10 @@ function App() {
 
   const handleSearchCharacter = (value) => {
     setSearchCharacter(value);
+  };
+
+  const handleReset = () => {
+    setNewMovie({ movieName: '', character: '' });
   };
 
   const filters = movieList
@@ -118,6 +135,11 @@ function App() {
             path='/'
             element={
               <>
+                <MovieForm
+                  newMovie={newMovie}
+                  addMovie={addMovie}
+                  changeData={changeData}
+                />
                 <Filters
                   //necesita la funcion para guardar en mi variable de search movies el valor que escribe la usuario en el input
                   // y necesito la varibale de estado
@@ -129,6 +151,7 @@ function App() {
                   searchDirector={searchDirector}
                   handleSearchCharacter={handleSearchCharacter}
                   characters={getCharacter()}
+                  handleReset={handleReset}
                 />
                 {notFound()}
                 <MovieSceneList movieItem={filters} />

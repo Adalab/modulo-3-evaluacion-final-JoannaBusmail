@@ -2,6 +2,7 @@ import FilterMovie from './FilterMovie';
 import FilterYear from './FilterYear';
 import FilterDir from './FilterDir';
 import FilterCharacter from './FilterCharacter';
+import Reset from './Reset';
 
 const handleSubmit = (ev) => {
   ev.preventDefault();
@@ -27,6 +28,8 @@ function Filters(props) {
           handleSearchCharacter={props.handleSearchCharacter}
           characters={props.characters}
         />
+
+        <Reset handleReset={props.handleReset} />
       </form>
     </section>
   );
