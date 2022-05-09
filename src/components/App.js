@@ -17,7 +17,8 @@ function App() {
   const [movieList, setMovieList] = useState([]);
   const [searchMovie, setSearchMovie] = useState(lsObject.get('inputs', ''));
   const [searchYear, setSearchYear] = useState('all');
-
+  const [searchDirector, setSearchDirector] = useState('');
+  const [searchCharacter, setSearchCharacter] = useState('select');
   //quiero renderizar una única vez, el listado de la API, cuando se caraga la pagina para eso hago un useEffect y le incluyo como segundo parámetro un array vacío
   useEffect(() => {
     getApiData().then((apiData) => {
@@ -37,11 +38,32 @@ function App() {
     setSearchYear(value);
   };
 
+  const handleSearchDir = (value) => {
+    setSearchDirector(value);
+  };
+
+  const handleSearchCharacter = (value) => {
+    setSearchCharacter(value);
+  };
+
   const filters = movieList
     .filter((movieFilter) => {
       return movieFilter.movieName
         .toLowerCase()
         .includes(searchMovie.toLowerCase());
+    })
+    .filter((dirFilter) => {
+      return dirFilter.director
+        .toLowerCase()
+        .includes(searchDirector.toLowerCase());
+    })
+    .filter((characterFilter) => {
+      if (searchCharacter === 'select') {
+        return true;
+      } else {
+        console.log(searchCharacter);
+        return characterFilter.character === searchCharacter;
+      }
     })
     .filter((yearFilter) => {
       if (searchYear === 'all') {
@@ -62,6 +84,13 @@ function App() {
     const uniqueYear = new Set(yearMovies);
     const uniques = [...uniqueYear];
     return uniques;
+  };
+
+  const getCharacter = () => {
+    const characterMovie = movieList.map((character) => character.character);
+    const uniqueChar = new Set(characterMovie);
+    const uniqueCharacter = [...uniqueChar];
+    return uniqueCharacter;
   };
 
   const notFound = () => {
@@ -96,6 +125,10 @@ function App() {
                   searchMovie={searchMovie}
                   years={getYear()}
                   handleSearchYear={handleSearchYear}
+                  handleSearchDir={handleSearchDir}
+                  searchDirector={searchDirector}
+                  handleSearchCharacter={handleSearchCharacter}
+                  characters={getCharacter()}
                 />
                 {notFound()}
                 <MovieSceneList movieItem={filters} />
